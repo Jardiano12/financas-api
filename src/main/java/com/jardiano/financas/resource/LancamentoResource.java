@@ -62,8 +62,8 @@ public class LancamentoResource {
 	private LancamentoRepository lancamentoRepository;
 	
 	@GetMapping
-	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
-		return lancamentoRepository.filtrar(lancamentoFilter);
+	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
 	}
 	
 	@PostMapping
@@ -92,5 +92,11 @@ public class LancamentoResource {
 		return ResponseEntity.badRequest().body(erros);
 	}
 	
+	
+	@DeleteMapping("/{codigo}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover(@PathVariable Long codigo) {
+	    this.lancamentoRepository.deleteById(codigo);
+	}
 	
 }
