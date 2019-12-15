@@ -40,6 +40,7 @@ import com.jardiano.financas.model.Categoria;
 import com.jardiano.financas.model.Lancamento;
 import com.jardiano.financas.repository.CategoriaRepositoy;
 import com.jardiano.financas.repository.LancamentoRepository;
+import com.jardiano.financas.repository.filter.LancamentoFilter;
 import com.jardiano.financas.service.LancamentoService;
 import com.jardiano.financas.service.exception.PessoaInexistenteOuInativaException;
 
@@ -61,8 +62,8 @@ public class LancamentoResource {
 	private LancamentoRepository lancamentoRepository;
 	
 	@GetMapping
-	public List<Lancamento> listar() {
-		return lancamentoRepository.findAll();
+	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
+		return lancamentoRepository.filtrar(lancamentoFilter);
 	}
 	
 	@PostMapping
